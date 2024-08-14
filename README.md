@@ -1,126 +1,58 @@
+
 # Structify
 
 ## Giriş
-Günümüzde drone'lar ile yapılan ve bazı ülkelerde testleri halen devam etmekte olan
-birçok proje mevcut. Bu projelerin birçoğu şehir içinde kargo, yemek, içecek, gıda ürünleri vb. ürünleri teslimat için tasarlanmıştır. Bu konseptte drone projelerinin gelişimi ve test aşamaları oldukça zor ve maliyetlidir. Drone'ların bakımı, satın alınıp modifiye edilmesi, gömülü yazılımları ve eğer varsa yapay zeka modellerini üretmek zaten ciddi bir yatırım ve zaman ister. Bunun yanında şehir içinde elektrik tellerinden düzensiz ve birbirinden alakasız yapılanmalara kadar birçok engel drone'ların bozulmasına neden olur. Test aşamalarının sivillerin güvenliği dikkate alınarak yapılması ise apayrı bir zorluktur. Bu proje, fikir aşamasında olmakta olup yukarıdaki birçok riski içermez veya önemli ölçüde az içerir ve birçok zorluğu daha hızlı çözüme kavuşturabilme kapasitesine sahiptir.
+Web alanının çok popüler olduğu bu dönemlerde her gün belki binlerce yeni yazılım projesi hayata geçiriliyor veya ölüyor. Özellikle web projelerinin birçoğu en başta geliştirilirken tecrübesizlik ve kötü kod yazımından kaynaklı birçok sorun meydana gelmekte ve bu sorunlar genelde proje oldukça ciddi bir seviyede ilerlemiş iken ortaya çıkmaktadır. Dolayısıyla zaten çalışan veya çok fazla ilerletilmiş olan bu projelerin bozuk temelden kaynaklı oluşan sorunlarının onarımı da zahmetli olmaktadır. Birçok durumda zaten dükkan kapatılmaktadır. Farklı bir açıdan bakıldığında tecrübeli yazılımcılar için temelin düzgün inşa edilmemesinden kaynaklı bu sorunlar birer iş fırsatıdır. Bu sorunları tecrübeli yazılımcılar veya firmalar çözebilir veya bu sorunların en baştan önüne geçmek için sağlam mimariler geliştirip satabilirler.
 
 ## Fikir
-Projenin ana fikri, basit bir şekilde **"Drone ile Otel Sahillerinde Teslimat"** şeklinde açıklanabilir. Otel sahillerinde müşterilerin gıda taleplerini karşılayan büfe, market tarzı noktalar bulunur. Müşteriler sahilde eşyalarının olduğu yerden bu noktalara yürüyerek gider gelirler. Bence, eğer bir drone ile dağıtım merkezi olsaydı ve ürünler büfeden müşterilerin şezlongta yattığı yere kadar teslim edilebilseydi bu gerçekten tatil konforunu ikiye katlardı. Sonrasında sahilde yapılan ve testleri tamamlanan bu projeyi şehirlerin içine taşımak ise ilerideki hedefim.
+Structify projesinin ana fikri, basit bir şekilde **"Kullanıma Hazır Kapsamlı Yazılım Mimarileri"** şeklinde açıklanabilir. Zaten ismi de "struct" ve "beautify" kelimelerinin birleşiminden gelmektedir, bir yazılım mimarisi nasıl bir sanat eseri olabilir'i göstermek istedim. Girişim seviyesindeki birçok girişimci firma geliştirdikleri projelerde bir standart yakalamakta zorlanır. Eğer biz pazarlamayı başarırsak onlara özel tasarladığımız yazılım mimarilerini bu firmalara satabiliriz. 3-4 aylık işi bir haftada bitirme ve yıllar sonra da oluşabilecek sorunların yaşanmayacağı garantisi bir firma için çok önemlidir. Ayrıca ileride yazılımcı sayılarının artması, sürekli işe alımların ve çıkışların gerçekleştiği bu piyasada projenin standartlarını korumak açısından çok zordur. Bu temel mimari ve sağlam dökümantasyon ile birçok standartizasyon sorunu çözülmüş olacaktır.
 
 ## Başlıklar
-1. **Prototip Üretim**
-    * Drone
-    * Teslimat Ünitesi
-    * Test
-    * Kritikler
-2. **Yazılım**
-3. **Üretim**
-4. **Pazarlama**
-5. **Satış Sonrası Servis**
-6. **Projenin gelecekteki seyri**
+1. **İlk Temel Mimari**
+    * Ana Mimari(ler)
+    * Test eklentisi
+2. **Pazarlama**
+3. **Servis ve Bakım**
+4. **Projenin gelecekteki seyri**
 
 ---
 
-### 1. Prototip Üretim
+### 1. İlk Temel Mimari
 
-Projenin sunulabilmesi, ortaya çıkacak drone'un incelenebilmesi için yazılımından testlerine kadar her aşaması bitirilmiş bir prototip ürün geliştirilmelidir. Bu ürün, tam anlamınya seri üretime hazır, sürdürülebilir şekilde tasarlanmış olmalıdır.
+#### 1. Ana Mimari(ler)
 
-1.1 **Drone**
-> **İlk olarak drone prototipi hazırlanmalıdır. Sırasıyla:**
+Piyasada kullanılan en yaygın yazılım mimarileri başlıca: Mikroservisler, katmanlı mimariler: onion, hexagonal; event driven, mvc... Bu mimarilerden birisi başlangıç projesi olarak seçilmeli ve tam kullanıma hazır hale getirilmelidir. Daha sonra pazarlama süreci de başarıya ulaşırsa diğer mimariler için de temel mimari oluşturulur.
 
-> * Drone'un temel iskeletinin nasıl elde edileceği belirlenmeli (Satın alınma veya sıfırdan üretim)
+Genelde projeler bir backend (Server) ve bir veya birkaç client'ten oluşur (React, flutter, vue, swift...).
 
-> * Eğer drone sıfırdan geliştirilecekse dış iskelet ve iç iskeletin ayrı ayrı tasarlanması ve ürettirilmesi gerekektedir.
+**1.1.1 Server**
+Server tarafında ana mimari olarak olarak onion seçtiğimizi varsayalım. Bu noktada birden fazla ecosystem ile çalışmak gerekecek. Başlangıçta .NET ve Spring olabilir. Bu ecosystem'ler ile iki tane onion architecture projesi geliştirilecek. Bu projeler özellikle kendi ecosystem'lerinin eksikliklerine odaklı olarak tasarlanacak. Gelin biraz derine inelim:
 
-> * Drone'un yazılımı geliştirilmelidir. Yazılım, uzaktan kumanda edilmesi, pist alanınının otonom şekilde tanınması, geliştirilecek yazılım ile bağlantının kurulması, uçarken otonom güzergâh belirleme ve müşteriye teslimatın sağlanması aşamalarının tamamını içermelidir.
+>**.NET :** Bir .NET web projesi inşa edeceğinizde kendi routing yapınızı oluşturmaz, onun yerine attribute'lar ile http endpointlerini oluşturursunuz. Ayrıca gRPC gibi farklı protokollere kolay geçiş imkanınız da yoktur.
 
-1.2 **Teslimat Ünitesi**
-> **İkinci aşamada drone'a bağlı olan ve teslim edilecek ürünlerin taşınacağı bir teslimat ünitesi prototipi tam kullanıma hazır olacak şekilde üretilmelidir. Bu ünite üretilirken:**
+> **.NET :** Endpoint'ler için bir isimlendirme standardı yoktur. CRUD gibi çok yaygın işlemler için bile standart yoktur ve bu client tarafında işi zorlaştırmaktadır.
 
-> * Ürünlerin teslimat sırasında sarsılmaması ve kırılmaması ve içeceklerin dökülmemesi,
-> * Büfe çalışanının kolayca ürünleri yerleştirebilmesi,
-> * Müşterinin ürünleri kolayca teslim alabilmesi,
-> * ana yazılıma bağlanarak authentication işlemini yapabilmesi,
-> * Yağmur, kar, kış gibi etkenlere dayanıklı olması
+> **.NET :** Caching, logging, exception management gibi feature'lar için attribute gibi kolay kullanım altyapıları yoktur.
 
-> **gibi özelliklere sahip olmalıdır.**
-    
+> **.NET :** EF Core sağlam bir ORM'dir ancak seeder ve faker gibi özelliklerden yoksundur.
 
-1.3 **Test**
+> **.NET :** Security için hazır altyapıların yeterli olmaması
 
-> **Bu raporda bahsedilen tüm bu teknik geliştirmelerin detaylıca test edilmesi çok önemlidir. Bu testler için bir alan gerekmektedir. Testlerin bolca tekrardan oluşması ve dolayısıyla uzun zaman süreceği de göz önüne alınmalıdır.**
+gibi sorunlar, temelde tüm bu özellikleri destekleyen, kullanımı çok kolay ve standart bir mimari ihtiyacının olduğunu bize anlatır.
 
-1.4 **Kritikler**
+**1.1.2 Clients**
+Büyük girişim projeleri genelde bir mobil uygulama ve birkaç web clienti ihtiyacı duyar. CMS, CDN, Landing, Dashboard, Mobile olmak üzere 5 farklı client altyapısının bir haftada firma için hazırlanıp verilmesi gerçekten de firma için maliyet açısından çok büyük artıdır. Neler sağlayacağız? Frontend tarafında firmanın seçeceği CSS framework, API standartlarına tam uygun temel api servisleri, responsive design için altyapı, hazır temalar, standardizasyon için lint konfigürasyonu ve dahası...
 
-> **Müşteri ürünü sipariş ettiğinde Drone GPS ile müşterinin yakınına gelebilir ancak GPS 
-sinyalleri her zaman tam nokta belirtmez. Bu yüzden drone'un müşteriyi bulması gerekir. 
-Bu noktada birkaç çözüm önerisi var:**
+#### 1.2 Test eklentisi
+Hem server hem client'ler için sağlam test'lerin yazılması, bunların eğitimi ve detaylı örneklendirilmesi çok önemlidir. Bu noktada testlerin bizin tarafımızdan bizim mimarimiz üzerinde yazılması için ayrı ücret teklif edilebilir.
 
-> * Drone, müşterinin telefonundaki uygulama aracılığıyla manuel olarak müşteri
-tarafından yönlendirilerek teslimat sağlanabilir. (Burada müşteri kaynaklı bir arıza veya kaza olması durumunda sıkıntı oluşabilir)
-> * Drone, yapay zeka ile müşterinin yüzünü tanıyarak ürün teslimatını yapabilir.
-> * Drone, müşteriye otel girişinde verilecek bilekliklerde bulunan bir sensör 
-sayesinde müşteriyi bulabilir. (bunun en büyük dezavantajı otel dışında kullanıma
-uygun olmamasıdır)
+### 2. Pazarlama
+Bu projenin aslında en önemli kısmı pazarlamasıdır. Çünkü piyasada böyle bir projenin ün edinmesi, firmalar tarafından yatırıma değer bulunması için çok iyi reklam ve pazarlama yapılması gerekmektedir. Bu noktada girişim projelerinin bulunması ve reklamın onlara yönelik gerçekleştirilmesi de çok önemlidir çünkü bizim asıl müşterilerimiz girişim projelerinden olacak.
 
-> **Drone'ların şarj olacakları ve siparişleri teslim alabilecekleri bir piste ihtiyaç duyulacaktır.**
-
-> * Pist, yağmur, rüzgar, kar gibi etkenlere karşı korunaklı olmalıdır.
-> * Pist, büfe'deki çalışanların kolaylıkla ulaşabileceği yakınlıkta olmalıdır. (Bu, müşteri yoğunluğunun çok olduğu dönemlerde oldukça önem arz edecektir)
-> * Pist, şarj istasyonlarına uygun tasarlanmalıdır.
-> * Drone'lar otonom olarak pisti bulabilmeli ve otonom şekilde piste iniş kalkış yapabilmelidir.
+### 3. Servis ve Bakım
+Proje teslim edildikten sonra belli bir süreye kadar servis ve bakım hizmeti verilmeli, daha sonra da olası buglar, versiyon güncellemeleri için de bakım sağlanmalıdır.  
 
 ---
 
-### 2. Yazılım
-
-Ana Platform (API) Yazılımı:
-
-> **Müşterilerin ürün siparişi vermeleri, drone'lara emir gitmesi, siparişin teslim edilmesi, iade, müşteri hizmetleri gibi süreçleri yönetmek ve müşteriye kolaylık sağlamak için **Getir**, **Yemeksepeti** gibi bir platform yazılımı geliştirilecektir. Bu platformun sürdürülebilir olması, scalibility'e uygun olması için backend tarafında kullanılacak mimarinin kapsamlı bir değerlendirmeden sonra seçilmesi gerekmektedir. İhtiyaç halinde şehir içinde kullanım gibi extension'lara da kolaylıkla adapte olabilecek bir yapı olmalıdır.**
-
-Drone'lardaki Gömülü Yazılım:
-
-> **Drone'lara büyük ihtimalle C/C++ ile bir gömülü yazılım geliştirilecektir. Bu yazılım, API'a bağlanacak, otonom şekilde piste iniş/kalkış yapacak, GPS ile rota belirleyip (veya API tarafından gelen rota ile) müşteriye teslimatı gerçekleştirecek, anlık olarak etrafını izleyecek ve drone'daki sensörler aracılığıyla güvenliği sağlayacak.**
-
----
-
-### 3. Üretim
-Projede kullanılacak drone'ları 3. parti bir satıcıdan mı alacağız yoksa kendimiz mi üreteceğiz? Bu konunun ayrıntılı konuşulması gerekmektedir.
-
-Drone'lara bağlı teslimat ünitelerinin tasarımı ve üretimi ise bizim tarafımızdan yapılacaktır. 
-
-Drone'ların pist alanlarının üretimini ise nasıl bir yapıya sahip olacakları belirler. Eğer büyük parçalara sahip robotik bir pist üretilmesine karar verilirse bu durumda seri üretime bir parça daha eklenmiş olur. Ancak eğer sadece basit bir mekanizma ile pist alanının yapılabileceğine karar verirsek pistin üretimi pek sorun yaratmayacaktır. 
-
----
-
-### 4. Pazarlama
-Türkiye'de birçok otel bulunmakta ve her biri farklı müşteri segmentine hitap etmektedir ve hitap ettikleri müşteri segmentine göre oteller birbirinden fiyat segmentlerine göre ayrılmaktadır. Bunu yüksek, orta ve düşük segment olarak sıralayabiliriz.
-
-Bu projenin yazılım platformu ve drone'larının tam hazır olduğu varsayılırsa ilk müşterimiz otel yönetimleri olacaktır. Bizim bu otel yönetimlerinden hangi segmentasyonu hedefleyeceğimiz ise kritik bir önem taşımaktadır. Bunu daha kolay anlaşılması için otel yönetimlerinin gözünden incelemekte fayda var:
-
-1.1 **Projenin Yeni Müşteriler Kazandırma Potansiyeli**
-
-> Oteller müşteri çekebilmek için farklı reklam stratejileri izleyebilirler. Bu durumda bizim projemiz bir reklam aracı olarak kullanılabilir. Örneğin "Drone ile Ayağınıza Teslimat" gibi reklam kampanyaları ile daha fazla müşteri toplama yoluna gidilebilir.
-
-1.2 **Projenin Otel Satışlarını ve Kârlılığını Artırma Potansiyeli**
-
-> Otel, projeyi kâr elde etme aracı olarak görebilir ve yatırım yapabilir. Bu durumda drone'un sahillerde kullanılması bir ücretlendirmeye tâbi tutulacaktır. Drone'ların kullanım oranlarının yüksek olması için müşteri segmentinin de yüksek olması gerekir.
-
-> Yüksek segmentli müşteriler genelde bu tür hizmetleri kullanırken ortaya çıkan giderleri önemsemezler, bu durumda drone'ların kullanım oranı da düşük segment otellere göre daha yüksek olur. Yani eğer otel yüksek fiyat segmentli ise büyük bir ihtimalle bu yolu kullanarak kâr elde edecektir.
-
-Başka bir açıdan incelendiğinde proje sadece kendisini pazarlama aracı olarak kullanmaz. Drone'ların otellere satılması, satış sonrası servisler de bu işin bir başka ekonomik boyutunu ve kâr elde etme yolunu bize gösterir. Yani aslında proje ile birlikte drone'ları da ürün olarak pazarlayabiliriz.
-
----
-
-### 5. Satış Sonrası Servis
-Drone'ların seri üretimden çıkıp satıldıktan sonra devamlı bakım ve onarımlarının yapılması gerekir. Bu noktada ciddi bir yatırım gerekecektir.
-Seri üretimle birlikle **bakım hizmeti**, başlı başına ayrı bir **"iş bölümü"** ihtiyacı anlamına da geliyor.
-
----
-
-### 6. Projenin Gelecekteki Seyri
-1. Proje, doğası gereği drone'ları tam hakimiyet ile yönetebilmeyi gerektirmektedir. Bu beceriye sahip bir işletme ise yeni sahillere açılabilme ve işi büyütebilme avantajına sahiptir. Sadece Türkiye'de bir sürü sahil bulunmakta ve bu da bir sürü müşteri anlamına gelmektedir.
-
-2. Drone'lar, başarılı ve uzun süre süren testler sonucunda şehir içi teslimat için de kullanılabilir hale gelecektir. Proje, ileride bu yönde de genişleme gösterebilecek bir potansiyele sahiptir. Zaten bu projenin asıl hedefi şehirlerde drone ile teslimatı Türkiye'de kelimenin tam anlamıyla **"gerçekleştirmektir"**.
-
-3. Drone'lara yapay zeka entegre etmek ise en önemli hedefim. Elon Musk'ın Tesla araçlarını tamamen otonom hale getirebilmek için $\color{red}{\textsf{3 milyar kilometre}}$ test sürüşü verisi topladığını biliyoruz. Benzer şekilde global bir etki yaratabilmek ve tüm dünya'ya projemizi yayabilmek adına hem testler hem de tam kullanım esnasında yapay zeka modellerini eğitmek için veri toplamak ise asıl hedeflerimden bir tanesi.
+### 4. Projenin gelecekteki seyri
+Bu projenin pazarlanması başarılı olursa ve birkaç sağlam müşteri ile sağlam işler çıkarılırsa proje gerçekten çok büyüyecektir çünkü piyasada işlerinde tam profesyonel, birsürü farklı ecosystem ile çalışan ve çok büyük projelere destek olabilecek yetkinlikle yazılımcıların olduğu gerçeği fark edilecek ve bu projenin önceki referanslarına bakıldığında verdiği güven üst seviyelerde olacaktır.
