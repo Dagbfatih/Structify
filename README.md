@@ -20,12 +20,14 @@ Structify projesinin ana fikri, basit bir şekilde **"Kullanıma Hazır Kapsaml�
 ### 1. İlk Temel Mimari
 
 #### 1. Ana Mimari(ler)
-
 Piyasada kullanılan en yaygın yazılım mimarileri başlıca: Mikroservisler, katmanlı mimariler: onion, hexagonal; event driven, mvc... Bu mimarilerden birisi başlangıç projesi olarak seçilmeli ve tam kullanıma hazır hale getirilmelidir. Daha sonra pazarlama süreci de başarıya ulaşırsa diğer mimariler için de temel mimari oluşturulur.
+
+Github veya başka bir version-control sistemi ile uyumlu çalışılmalıdır ve ürün teslim edilmeden önce tüm gerekli github altyapısı oluşturulmalıdır.
 
 Genelde projeler bir backend (Server) ve bir veya birkaç client'ten oluşur (React, flutter, vue, swift...).
 
 **1.1.1 Server**
+
 Server tarafında ana mimari olarak olarak onion seçtiğimizi varsayalım. Bu noktada birden fazla ecosystem ile çalışmak gerekecek. Başlangıçta .NET ve Spring olabilir. Bu ecosystem'ler ile iki tane onion architecture projesi geliştirilecek. Bu projeler özellikle kendi ecosystem'lerinin eksikliklerine odaklı olarak tasarlanacak. Gelin biraz derine inelim:
 
 >**.NET :** Bir .NET web projesi inşa edeceğinizde kendi routing yapınızı oluşturmaz, onun yerine attribute'lar ile http endpointlerini oluşturursunuz. Ayrıca gRPC gibi farklı protokollere kolay geçiş imkanınız da yoktur.
@@ -43,9 +45,11 @@ gibi sorunlar, temelde tüm bu özellikleri destekleyen, kullanımı çok kolay 
 Ayrıca sorting, paging ve filtering için hazır altyapılar kurulmalıdır. File management için tamamen kullanıma hazır bir yapı oluşturulmalıdır. CQRS için pipeline'lar, repository pattern için interceptor'lar ile authorization, logging, caching, validation gibi altyapılar kurulmalıdır. Dinamik data için çok gelişmiş bir translation yapısı kurulmalıdır. Manuel, External Translation API gibi farklı birkaç seçenek eklenmeli ve çok kolay bir şekilde elle değiştirilebilmelidir.
 
 **1.1.2 Clients**
+
 Büyük girişim projeleri genelde bir mobil uygulama ve birkaç web clienti ihtiyacı duyar. CMS, CDN, Landing, Dashboard, Mobile olmak üzere 5 farklı client altyapısının bir haftada firma için hazırlanıp verilmesi gerçekten de firma için maliyet açısından çok büyük artıdır. Neler sağlayacağız? Frontend tarafında firmanın seçeceği CSS framework, API standartlarına tam uygun temel api servisleri, responsive design için altyapı, hazır temalar, standardizasyon için lint konfigürasyonu ve dahası...
 
 #### 1.2 Test eklentisi
+
 Hem server hem client'ler için sağlam test'lerin yazılması, bunların eğitimi ve detaylı örneklendirilmesi çok önemlidir. Bu noktada testlerin bizin tarafımızdan bizim mimarimiz üzerinde yazılması için ayrı ücret teklif edilebilir.
 
 ### 2. Pazarlama
