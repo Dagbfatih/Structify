@@ -19,7 +19,7 @@ Structify projesinin ana fikri, basit bir şekilde **"Kullanıma Hazır Kapsaml�
 
 ### 1. İlk Temel Mimari
 
-#### 1. Ana Mimari(ler)
+#### 1.1 Ana Mimari(ler)
 Piyasada kullanılan en yaygın yazılım mimarileri başlıca: Mikroservisler, katmanlı mimariler: onion, hexagonal; event driven, mvc... Bu mimarilerden birisi başlangıç projesi olarak seçilmeli ve tam kullanıma hazır hale getirilmelidir. Daha sonra pazarlama süreci de başarıya ulaşırsa diğer mimariler için de temel mimari oluşturulur.
 
 Github veya başka bir version-control sistemi ile uyumlu çalışılmalıdır ve ürün teslim edilmeden önce tüm gerekli github altyapısı oluşturulmalıdır.
