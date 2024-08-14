@@ -40,6 +40,8 @@ Server tarafında ana mimari olarak olarak onion seçtiğimizi varsayalım. Bu n
 
 gibi sorunlar, temelde tüm bu özellikleri destekleyen, kullanımı çok kolay ve standart bir mimari ihtiyacının olduğunu bize anlatır.
 
+Ayrıca sorting, paging ve filtering için hazır altyapılar kurulmalıdır. File management için tamamen kullanıma hazır bir yapı oluşturulmalıdır. CQRS için pipeline'lar, repository pattern için interceptor'lar ile authorization, logging, caching, validation gibi altyapılar kurulmalıdır. Dinamik data için çok gelişmiş bir translation yapısı kurulmalıdır. Manuel, External Translation API gibi farklı birkaç seçenek eklenmeli ve çok kolay bir şekilde elle değiştirilebilmelidir.
+
 **1.1.2 Clients**
 Büyük girişim projeleri genelde bir mobil uygulama ve birkaç web clienti ihtiyacı duyar. CMS, CDN, Landing, Dashboard, Mobile olmak üzere 5 farklı client altyapısının bir haftada firma için hazırlanıp verilmesi gerçekten de firma için maliyet açısından çok büyük artıdır. Neler sağlayacağız? Frontend tarafında firmanın seçeceği CSS framework, API standartlarına tam uygun temel api servisleri, responsive design için altyapı, hazır temalar, standardizasyon için lint konfigürasyonu ve dahası...
 
@@ -47,7 +49,7 @@ Büyük girişim projeleri genelde bir mobil uygulama ve birkaç web clienti iht
 Hem server hem client'ler için sağlam test'lerin yazılması, bunların eğitimi ve detaylı örneklendirilmesi çok önemlidir. Bu noktada testlerin bizin tarafımızdan bizim mimarimiz üzerinde yazılması için ayrı ücret teklif edilebilir.
 
 ### 2. Pazarlama
-Bu projenin aslında en önemli kısmı pazarlamasıdır. Çünkü piyasada böyle bir projenin ün edinmesi, firmalar tarafından yatırıma değer bulunması için çok iyi reklam ve pazarlama yapılması gerekmektedir. Bu noktada girişim projelerinin bulunması ve reklamın onlara yönelik gerçekleştirilmesi de çok önemlidir çünkü bizim asıl müşterilerimiz girişim projelerinden olacak.
+Bu projenin aslında en önemli kısmı pazarlamasıdır. Çünkü piyasada böyle bir projenin ün edinmesi, firmalar tarafından yatırıma değer bulunması için çok iyi reklam ve pazarlama yapılması gerekmektedir. Bu noktada girişim projelerinin bulunması ve reklamın onlara yönelik gerçekleştirilmesi de çok önemlidir çünkü bizim asıl müşterilerimiz girişim projelerinden olacaktır.
 
 ### 3. Servis ve Bakım
 Proje teslim edildikten sonra belli bir süreye kadar servis ve bakım hizmeti verilmeli, daha sonra da olası buglar, versiyon güncellemeleri için de bakım sağlanmalıdır.  
